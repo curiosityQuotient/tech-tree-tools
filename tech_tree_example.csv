@@ -1,0 +1,7 @@
+Name,Predecessors,Sucessors
+"Pottery",,"Writing;Irrigation"
+"Writing","Pottery",
+"Currency","Writing","Mathematics;Apprentiship"
+"Mathematics","Currency","Education"
+"Apprentiship","Currency", "Education; Gunpowder"
+"Education","Mathematics;Apprentiship","Mass Production;Astronomy;Banking"
