@@ -53,3 +53,5 @@ output_df["Successors"] = ""
 output_df.to_csv("freeciv_tech_tree.csv", index=False)
 
 print("x")
+
+# Note: Lvl 1 tech costs 28 bulbs, lvl 2 costs 79-28 = 51
