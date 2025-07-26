@@ -70,9 +70,21 @@ class TechTree:
         nx.draw(self.tech_graph, posns, with_labels=True)
         plt.show()
 
+    def list_predecessors(self, node_name):
+        if self.tech_graph.size() < 1:
+            raise Exception("Graph is empty, populate it first")
+        if node_name not in list(self.tech_graph.nodes):
+            raise ValueError("node_name not in graph")
+
+        for nn in self.tech_graph.predecessors(node_name):
+            print(nn)
+
+        # TODO: change logic to loop through all predecessors
+
 
 if __name__ == "__main__":
     tech_tree = TechTree("Freeciv technology tree")
     raw_csv_path = "freeciv_tech_tree.csv"  # "tech_tree_example.csv"
     tech_tree.from_csv(raw_csv_path)
+    tech_tree.list_predecessors("Democracy")
     tech_tree.draw_graph()
