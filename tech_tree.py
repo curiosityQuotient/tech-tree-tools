@@ -70,16 +70,25 @@ class TechTree:
         nx.draw(self.tech_graph, posns, with_labels=True)
         plt.show()
 
-    def list_predecessors(self, node_name):
+    def list_predecessors(self, node_name: str):
+        """Lists all predecessors of a given node."""
         if self.tech_graph.size() < 1:
             raise Exception("Graph is empty, populate it first")
         if node_name not in list(self.tech_graph.nodes):
             raise ValueError("node_name not in graph")
 
-        for nn in self.tech_graph.predecessors(node_name):
-            print(nn)
-
-        # TODO: change logic to loop through all predecessors
+        # loop through all predecessors
+        all_predecessors = set()
+        to_visit = [node_name]
+        while to_visit:
+            current = to_visit.pop()
+            for pred in self.tech_graph.predecessors(current):
+                if pred not in all_predecessors:
+                    print(f"Found predecessor: {pred} for {current}")
+                if pred not in all_predecessors:
+                    all_predecessors.add(pred)
+                    to_visit.append(pred)
+        print("All predecessors:", all_predecessors)
 
 
 if __name__ == "__main__":

@@ -25,4 +25,11 @@ tech_tree.draw_graph()
 
 Show predecessors of a node:
 
-TBC
+```python
+tech_tree.list_predecessors("node_name")
+```
+
+Feature list to be developed:
+
+* add resource calculations
+* calculate minimum development plan for technology given a progress state
