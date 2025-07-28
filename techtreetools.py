@@ -13,7 +13,7 @@ class TechTree:
     def from_csv(self, csv_path: str):
         """Populates a technology tree object from a csv."""
         # Import data from csv
-        with open(raw_csv_path) as csvfile:
+        with open(csv_path) as csvfile:
             spamreader = csv.reader(csvfile, delimiter=",", quotechar='"')
             headers = next(spamreader)
             raw_csv_data = []
