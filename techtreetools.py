@@ -67,8 +67,9 @@ class TechTree:
                 vert = jj + offset
                 posns[tech] = (ii, jj)
 
-        nx.draw(self.tech_graph, posns, with_labels=True)
-        plt.show()
+        fig, ax = plt.subplots(figsize=(10, 8), layout='constrained')
+        nx.draw(self.tech_graph, posns, with_labels=True, font_size=8)
+        plt.savefig("output/tech_tree.png")
 
     def list_predecessors(self, node_name: str):
         """Lists all predecessors of a given node."""
@@ -97,3 +98,4 @@ if __name__ == "__main__":
     tech_tree.from_csv(raw_csv_path)
     tech_tree.list_predecessors("Democracy")
     tech_tree.draw_graph()
+    print("Done")
