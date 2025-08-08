@@ -3,6 +3,15 @@ import csv
 import networkx as nx
 import matplotlib.pyplot as plt
 
+from dataclasses import dataclass
+
+@dataclass
+class TechNode:
+    """Defaults for a technology node."""
+    name: str = ""
+    predecessors: list[str] = None
+    completed: bool = False
+
 
 class TechTree:
     """Class for technology tree."""
@@ -13,36 +22,24 @@ class TechTree:
     def from_csv(self, csv_path: str):
         """Populates a technology tree object from a csv."""
         # Import data from csv
+        tech_nodes = []
         with open(csv_path) as csvfile:
             spamreader = csv.reader(csvfile, delimiter=",", quotechar='"')
-            headers = next(spamreader)
-            raw_csv_data = []
+            _ = next(spamreader) # skip header
             for row in spamreader:
-                node = {
-                    headers[0]: row[0],
-                    headers[1]: row[1].split(";"),
-                    headers[2]: row[2].split(";"),
-                }
-                raw_csv_data.append(node)
+                tech_nodes.append(TechNode(row[0], row[1].split(";")))
 
         # create nodes
         tech_tree = nx.DiGraph()
-        tech_list = []
-        for tech in raw_csv_data:
-            tech_list.append(
-                (
-                    tech[headers[0]],
-                    {headers[1]: tech[headers[1]], headers[2]: tech[headers[2]]},
-                )
-            )
-            tech_tree.add_node(
-                tech[headers[0]],
-                **{headers[1]: tech[headers[1]], headers[2]: tech[headers[2]]},
+        for tech in tech_nodes:
+            tech_tree.add_node(tech.name,
+                predecessors= tech.predecessors if tech.predecessors else [],
+                completed= tech.completed
             )
         # add edges
-        for tech in raw_csv_data:
-            current_tech = tech[headers[0]]
-            prereqs = tech[headers[1]]
+        for tech in tech_nodes:
+            current_tech = tech.name
+            prereqs = tech.predecessors
             for prereq in prereqs:
                 if prereq:  # skip empty strings
                     tech_tree.add_edge(prereq, current_tech)
@@ -67,11 +64,18 @@ class TechTree:
                 vert = jj + offset
                 posns[tech] = (ii, jj)
 
+        colours = []
+        for node in self.tech_graph.nodes:
+            if self.tech_graph.nodes[node]['completed']:
+                colours.append("green")
+            else:
+                colours.append("red")
+
         fig, ax = plt.subplots(figsize=(10, 8), layout='constrained')
-        nx.draw(self.tech_graph, posns, with_labels=True, font_size=8)
+        nx.draw(self.tech_graph, posns, with_labels=True, node_color=colours, font_size=8)
         plt.savefig("output/tech_tree.png")
 
-    def list_predecessors(self, node_name: str):
+    def list_predecessors(self, node_name: str) -> list:
         """Lists all predecessors of a given node."""
         if self.tech_graph.size() < 1:
             raise Exception("Graph is empty, populate it first")
@@ -90,6 +94,20 @@ class TechTree:
                     all_predecessors.add(pred)
                     to_visit.append(pred)
         print("All predecessors:", all_predecessors)
+        return list(all_predecessors)
+
+    def set_progress(self, completed_techs: list[str]):
+        """Sets the progress of the tech tree."""
+        for tech in completed_techs:
+            if tech in self.tech_graph.nodes:
+                self.tech_graph.nodes[tech]['completed'] = True
+            else:
+                raise ValueError(f"Tech {tech} not found in the graph")
+            # set predecessors as completed
+            predecessors = self.list_predecessors(tech)
+            for pred in predecessors:
+                self.tech_graph.nodes[pred]['completed'] = True
+        print("Progress updated for:", completed_techs)
 
 
 if __name__ == "__main__":
@@ -97,5 +115,6 @@ if __name__ == "__main__":
     raw_csv_path = "freeciv_tech_tree.csv"  # "tech_tree_example.csv"
     tech_tree.from_csv(raw_csv_path)
     tech_tree.list_predecessors("Democracy")
+    tech_tree.set_progress(["Advanced Flight"])
     tech_tree.draw_graph()
     print("Done")

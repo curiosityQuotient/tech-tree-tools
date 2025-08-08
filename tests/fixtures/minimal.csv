@@ -1,4 +1,4 @@
-Name,Predecessors,Successors
-A,,
-B,A,
-C,B,
+Name,Predecessors
+A,
+B,A
+C,B
