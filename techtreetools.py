@@ -46,7 +46,7 @@ class TechTree:
 
         self.tech_graph = tech_tree
 
-    def draw_graph(self):
+    def draw_graph(self, path: str):
         """Draws the graph that has been created."""
         # generation calcuations
         gen_info = [gen for gen in nx.topological_generations(self.tech_graph)]
@@ -73,7 +73,7 @@ class TechTree:
 
         fig, ax = plt.subplots(figsize=(10, 8), layout='constrained')
         nx.draw(self.tech_graph, posns, with_labels=True, node_color=colours, font_size=8)
-        plt.savefig("output/tech_tree.png")
+        plt.savefig(path)
 
     def list_predecessors(self, node_name: str) -> list:
         """Lists all predecessors of a given node."""
@@ -109,12 +109,26 @@ class TechTree:
                 self.tech_graph.nodes[pred]['completed'] = True
         print("Progress updated for:", completed_techs)
 
+    def path_to_target(self, target:str):
+        """Calculate the technology path to a target technology."""
+        predecessors = self.list_predecessors(target)
+        predecessors.append(target)
+        path_tree = TechTree(f"Path to {target}")
+        path_tree.tech_graph = self.tech_graph.subgraph(predecessors)
+        return path_tree
+
 
 if __name__ == "__main__":
+    # create a TechTree object
     tech_tree = TechTree("Freeciv technology tree")
+    # Populate a TechTree from a csv
     raw_csv_path = "freeciv_tech_tree.csv"  # "tech_tree_example.csv"
     tech_tree.from_csv(raw_csv_path)
+    # List all predecessors of a technology
     tech_tree.list_predecessors("Democracy")
+    # Set progress
     tech_tree.set_progress(["Advanced Flight"])
-    tech_tree.draw_graph()
+    tech_tree.draw_graph("output/tech_tree.png")
+    path_tree = tech_tree.path_to_target("Banking")
+    path_tree.draw_graph("output/tech_path.png")
     print("Done")
