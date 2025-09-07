@@ -55,3 +55,4 @@ output_df.to_csv("freeciv_tech_tree.csv", index=False)
 print("x")
 
 # Note: Lvl 1 tech costs 28 bulbs, lvl 2 costs 79-28 = 51
+bulb_func = lambda x: ((x + 2)*(x + 2)**0.5)*10 // 1
