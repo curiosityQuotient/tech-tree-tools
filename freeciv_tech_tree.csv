@@ -1,88 +1,88 @@
-Name,Predecessors
-Advanced Flight,Radio;Machine Tools
-Alphabet,
-Amphibious Warfare,Navigation;Tactics
-Astronomy,Mysticism;Mathematics
-Atomic Theory,Theory of Gravity;Physics
-Automobile,Combustion;Steel
-Banking,Trade;The Republic
-Bridge Building,Iron Working;Construction
-Bronze Working,
-Ceremonial Burial,
-Chemistry,University;Medicine
-Chivalry,Feudalism;Horseback Riding
-Code of Laws,Alphabet
-Combined Arms,Mobile Warfare;Advanced Flight
-Combustion,Refining;Explosives
-Communism,Philosophy;Industrialization
-Computers,Mass Production;Miniaturization
-Conscription,Democracy;Metallurgy
-Construction,Masonry;Currency
-Currency,Bronze Working
-Democracy,Banking;Invention
-Economics,Banking;University
-Electricity,Metallurgy;Magnetism
-Electronics,The Corporation;Electricity
-Engineering,The Wheel;Construction
-Environmentalism,Recycling;Space Flight
-Espionage,Communism;Democracy
-Explosives,Gunpowder;Chemistry
-Feudalism,Warrior Code;Monarchy
-Flight,Combustion;Theory of Gravity
-Fusion Power,Nuclear Power;Superconductors
-Genetic Engineering,Medicine;The Corporation
-Guerilla Warfare,Communism;Tactics
-Gunpowder,Invention;Iron Working
-Horseback Riding,
-Industrialization,Railroad;Banking
-Invention,Engineering;Literacy
-Iron Working,Bronze Working;Warrior Code
-Labor Union,Mass Production;Guerilla Warfare
-Laser,Mass Production;Nuclear Power
-Leadership,Chivalry;Gunpowder
-Literacy,Writing;Code of Laws
-Machine Tools,Steel;Tactics
-Magnetism,Iron Working;Physics
-Map Making,Alphabet
-Masonry,
-Mass Production,Automobile;The Corporation
-Mathematics,Alphabet;Masonry
-Medicine,Philosophy;Trade
-Metallurgy,Gunpowder;University
-Miniaturization,Machine Tools;Electronics
-Mobile Warfare,Automobile;Tactics
-Monarchy,Ceremonial Burial;Code of Laws
-Monotheism,Philosophy;Polytheism
-Mysticism,Ceremonial Burial
-Navigation,Seafaring;Astronomy
-Nuclear Fission,Mass Production;Atomic Theory
-Nuclear Power,Nuclear Fission;Electronics
-Philosophy,Mysticism;Literacy
-Physics,Literacy;Navigation
-Plastics,Refining;Space Flight
-Polytheism,Horseback Riding;Ceremonial Burial
-Pottery,
-Radio,Flight;Electricity
-Railroad,Steam Engine;Bridge Building
-Recycling,Mass Production;Democracy
-Refining,Chemistry;The Corporation
-Refrigeration,Sanitation;Electricity
-Robotics,Mobile Warfare;Computers
-Rocketry,Advanced Flight;Electronics
-Sanitation,Engineering;Medicine
-Seafaring,Pottery;Map Making
-Space Flight,Computers;Rocketry
-Stealth,Superconductors;Advanced Flight
-Steam Engine,Physics;Invention
-Steel,Electricity;Industrialization
-Superconductors,Nuclear Power;Laser
-Tactics,Conscription;Leadership
-The Corporation,Economics;Industrialization
-The Republic,Code of Laws;Literacy
-The Wheel,Horseback Riding
-Theology,Feudalism;Monotheism
-Theory of Gravity,Astronomy;University
-Trade,Currency;Code of Laws
-University,Mathematics;Philosophy
-Warrior Code,
-Writing,Alphabet
+Name,Predecessors,Cost
+Advanced Flight,Radio;Machine Tools,580.0
+Alphabet,,28.0
+Amphibious Warfare,Navigation;Tactics,364.0
+Astronomy,Mysticism;Mathematics,80.0
+Atomic Theory,Theory of Gravity;Physics,226.0
+Automobile,Combustion;Steel,468.0
+Banking,Trade;The Republic,146.0
+Bridge Building,Iron Working;Construction,111.0
+Bronze Working,,28.0
+Ceremonial Burial,,28.0
+Chemistry,University;Medicine,185.0
+Chivalry,Feudalism;Horseback Riding,146.0
+Code of Laws,Alphabet,51.0
+Combined Arms,Mobile Warfare;Advanced Flight,640.0
+Combustion,Refining;Explosives,415.0
+Communism,Philosophy;Industrialization,316.0
+Computers,Mass Production;Miniaturization,580.0
+Conscription,Democracy;Metallurgy,270.0
+Construction,Masonry;Currency,80.0
+Currency,Bronze Working,51.0
+Democracy,Banking;Invention,185.0
+Economics,Banking;University,185.0
+Electricity,Metallurgy;Magnetism,270.0
+Electronics,The Corporation;Electricity,364.0
+Engineering,The Wheel;Construction,111.0
+Environmentalism,Recycling;Space Flight,763.0
+Espionage,Communism;Democracy,364.0
+Explosives,Gunpowder;Chemistry,226.0
+Feudalism,Warrior Code;Monarchy,111.0
+Flight,Combustion;Theory of Gravity,468.0
+Fusion Power,Nuclear Power;Superconductors,828.0
+Genetic Engineering,Medicine;The Corporation,364.0
+Guerilla Warfare,Communism;Tactics,364.0
+Gunpowder,Invention;Iron Working,185.0
+Horseback Riding,,28.0
+Industrialization,Railroad;Banking,270.0
+Invention,Engineering;Literacy,146.0
+Iron Working,Bronze Working;Warrior Code,51.0
+Labor Union,Mass Production;Guerilla Warfare,580.0
+Laser,Mass Production;Nuclear Power,700.0
+Leadership,Chivalry;Gunpowder,226.0
+Literacy,Writing;Code of Laws,80.0
+Machine Tools,Steel;Tactics,364.0
+Magnetism,Iron Working;Physics,185.0
+Map Making,Alphabet,51.0
+Masonry,,28.0
+Mass Production,Automobile;The Corporation,523.0
+Mathematics,Alphabet;Masonry,51.0
+Medicine,Philosophy;Trade,146.0
+Metallurgy,Gunpowder;University,226.0
+Miniaturization,Machine Tools;Electronics,415.0
+Mobile Warfare,Automobile;Tactics,523.0
+Monarchy,Ceremonial Burial;Code of Laws,80.0
+Monotheism,Philosophy;Polytheism,146.0
+Mysticism,Ceremonial Burial,51.0
+Navigation,Seafaring;Astronomy,111.0
+Nuclear Fission,Mass Production;Atomic Theory,580.0
+Nuclear Power,Nuclear Fission;Electronics,640.0
+Philosophy,Mysticism;Literacy,111.0
+Physics,Literacy;Navigation,146.0
+Plastics,Refining;Space Flight,763.0
+Polytheism,Horseback Riding;Ceremonial Burial,51.0
+Pottery,,28.0
+Radio,Flight;Electricity,523.0
+Railroad,Steam Engine;Bridge Building,226.0
+Recycling,Mass Production;Democracy,580.0
+Refining,Chemistry;The Corporation,364.0
+Refrigeration,Sanitation;Electricity,316.0
+Robotics,Mobile Warfare;Computers,640.0
+Rocketry,Advanced Flight;Electronics,640.0
+Sanitation,Engineering;Medicine,185.0
+Seafaring,Pottery;Map Making,80.0
+Space Flight,Computers;Rocketry,700.0
+Stealth,Superconductors;Advanced Flight,828.0
+Steam Engine,Physics;Invention,185.0
+Steel,Electricity;Industrialization,316.0
+Superconductors,Nuclear Power;Laser,763.0
+Tactics,Conscription;Leadership,316.0
+The Corporation,Economics;Industrialization,316.0
+The Republic,Code of Laws;Literacy,111.0
+The Wheel,Horseback Riding,51.0
+Theology,Feudalism;Monotheism,185.0
+Theory of Gravity,Astronomy;University,185.0
+Trade,Currency;Code of Laws,80.0
+University,Mathematics;Philosophy,146.0
+Warrior Code,,28.0
+Writing,Alphabet,51.0

@@ -10,7 +10,9 @@ class TechNode:
     """Defaults for a technology node."""
     name: str = ""
     predecessors: list[str] = None
+    cost: int = 28
     completed: bool = False
+    generation: int = -1
 
 
 class TechTree:
@@ -27,13 +29,14 @@ class TechTree:
             spamreader = csv.reader(csvfile, delimiter=",", quotechar='"')
             _ = next(spamreader) # skip header
             for row in spamreader:
-                tech_nodes.append(TechNode(row[0], row[1].split(";")))
+                tech_nodes.append(TechNode(row[0], row[1].split(";"), row[2]))
 
         # create nodes
         tech_tree = nx.DiGraph()
         for tech in tech_nodes:
             tech_tree.add_node(tech.name,
                 predecessors= tech.predecessors if tech.predecessors else [],
+                cost= tech.cost,
                 completed= tech.completed
             )
         # add edges
@@ -49,20 +52,26 @@ class TechTree:
     def draw_graph(self, path: str):
         """Draws the graph that has been created."""
         # generation calcuations
-        gen_info = [gen for gen in nx.topological_generations(self.tech_graph)]
-        width = len(gen_info)
-        height = max([len(gen) for gen in gen_info])
+        if not hasattr(self, 'max_generation_size'): 
+            self.calcuate_generations()
+
+        width = self.total_generations
+        height = self.max_generation_size
 
         print(f"Width:{width}, Height:{height}")
 
         offset = height - 1
         posns = {}
-        for ii, techs in enumerate(gen_info):
+        gen_size = {}
+        for tech in self.tech_graph.nodes:
             # ii is width
-            horz = ii
-            for jj, tech in enumerate(techs):
-                vert = jj + offset
-                posns[tech] = (ii, jj)
+            horz = self.tech_graph.nodes[tech]['generation']
+            if horz not in gen_size.keys():
+                gen_size[horz] = 0
+            else:
+                gen_size[horz] += 1
+            vert = gen_size[horz] + offset
+            posns[tech] = (horz, vert)
 
         colours = []
         for node in self.tech_graph.nodes:
@@ -116,6 +125,21 @@ class TechTree:
         path_tree = TechTree(f"Path to {target}")
         path_tree.tech_graph = self.tech_graph.subgraph(predecessors)
         return path_tree
+    
+    def calcuate_generations(self):
+        """Calculate generations for each node."""
+        if self.tech_graph.size() < 1:
+            raise Exception("Graph is empty, populate it first")
+
+        gen_info = [gen for gen in nx.topological_generations(self.tech_graph)]
+        for ii, techs in enumerate(gen_info):
+            for tech in techs:
+                self.tech_graph.nodes[tech]['generation'] = ii
+        
+        self.total_generations = len(gen_info)
+        self.max_generation_size = max([len(gen) for gen in gen_info])
+
+        print("Generations calculated.")
 
 
 if __name__ == "__main__":
