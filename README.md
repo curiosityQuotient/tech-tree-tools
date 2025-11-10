@@ -9,7 +9,7 @@ The technology tree object must be created with a name first.
 tech_tree = TechTree("A name")
 ```
 
-Then a directed graph is created from a csv file.
+Then a directed graph is created from a csv file. The csv file must be arranged in three columns with the technology name, its predecessors (split by semicolons), and the cost - in that order.
 
 ```python
 tech_tree.from_csv("path-to-csv")

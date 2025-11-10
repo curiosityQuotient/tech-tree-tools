@@ -1,4 +1,4 @@
-Name,Predecessors
-A,
-B,A
-C,B
+Name,Predecessors,Cost
+A,,1
+B,A,1
+C,B,1

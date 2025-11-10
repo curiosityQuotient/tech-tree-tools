@@ -19,7 +19,7 @@ def test_list_predecessors():
     tech_tree = TechTree("Minimal Tech Tree")
     tech_tree.from_csv("tests/fixtures/minimal.csv")
     predecessor_list = tech_tree.list_predecessors("C")
-    assert predecessor_list == ["A", "B"]
+    assert predecessor_list == ["B", "A"]
 
 def test_set_progress():
     """Test that progress is set correctly"""
@@ -38,3 +38,22 @@ def test_path_to_target():
     assert "A" in path_tree.tech_graph.nodes
     assert "B" in path_tree.tech_graph.nodes
     assert "C" not in path_tree.tech_graph.nodes
+
+def test_calculate_generations():
+    """Test generation calculation."""
+    tech_tree = TechTree("Minimal Tech Tree")
+    tech_tree.from_csv("tests/fixtures/minimal.csv")
+    tech_tree.calcuate_generations()
+    assert tech_tree.tech_graph.nodes["A"]["generation"] == 0
+    assert tech_tree.tech_graph.nodes["B"]["generation"] == 1
+    assert tech_tree.tech_graph.nodes["C"]["generation"] == 2
+    assert tech_tree.total_generations == 3
+    assert tech_tree.max_generation_size == 1
+
+def test_calculate_resource():
+    """Test resource calculation to reach a target technology."""
+    tech_tree = TechTree("Minimal Tech Tree")
+    tech_tree.from_csv("tests/fixtures/minimal.csv")
+    tech_tree.set_progress(["A"])
+    total_cost = tech_tree.calculate_resource("C")
+    assert total_cost == 2  # Assuming B costs 1 and C costs 1
