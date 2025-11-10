@@ -142,7 +142,7 @@ class TechTree:
 
         print("Generations calculated.")
 
-    def calculate_resource(self, target: str):
+    def calculate_resource(self, target: str) -> int:
         """Calculate total resource cost to reach a target technology."""
         predecessors = self.list_predecessors(target)
         predecessors.append(target)
@@ -150,7 +150,7 @@ class TechTree:
         for tech in predecessors:
             if not self.tech_graph.nodes[tech]['completed']:    
                 total_cost += int(self.tech_graph.nodes[tech]['cost'])
-        print(f"Total cost to reach {target}: {total_cost}")
+        return total_cost
 
 
 if __name__ == "__main__":

@@ -49,3 +49,11 @@ def test_calculate_generations():
     assert tech_tree.tech_graph.nodes["C"]["generation"] == 2
     assert tech_tree.total_generations == 3
     assert tech_tree.max_generation_size == 1
+
+def test_calculate_resource():
+    """Test resource calculation to reach a target technology."""
+    tech_tree = TechTree("Minimal Tech Tree")
+    tech_tree.from_csv("tests/fixtures/minimal.csv")
+    tech_tree.set_progress(["A"])
+    total_cost = tech_tree.calculate_resource("C")
+    assert total_cost == 2  # Assuming B costs 1 and C costs 1
