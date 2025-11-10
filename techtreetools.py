@@ -1,4 +1,5 @@
 # Test of a tech tree visualiser tool
+from __future__ import annotations
 import csv
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -118,7 +119,7 @@ class TechTree:
                 self.tech_graph.nodes[pred]['completed'] = True
         print("Progress updated for:", completed_techs)
 
-    def path_to_target(self, target:str):
+    def path_to_target(self, target:str) -> TechTree:
         """Calculate the technology path to a target technology."""
         predecessors = self.list_predecessors(target)
         predecessors.append(target)
@@ -141,6 +142,16 @@ class TechTree:
 
         print("Generations calculated.")
 
+    def calculate_resource(self, target: str):
+        """Calculate total resource cost to reach a target technology."""
+        predecessors = self.list_predecessors(target)
+        predecessors.append(target)
+        total_cost = 0
+        for tech in predecessors:
+            if not self.tech_graph.nodes[tech]['completed']:    
+                total_cost += int(self.tech_graph.nodes[tech]['cost'])
+        print(f"Total cost to reach {target}: {total_cost}")
+
 
 if __name__ == "__main__":
     # create a TechTree object
@@ -154,5 +165,6 @@ if __name__ == "__main__":
     tech_tree.set_progress(["Advanced Flight"])
     tech_tree.draw_graph("output/tech_tree.png")
     path_tree = tech_tree.path_to_target("Banking")
+    path_tree.calculate_resource("Banking")
     path_tree.draw_graph("output/tech_path.png")
     print("Done")
